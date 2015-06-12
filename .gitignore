@@ -11,7 +11,6 @@
 /db/*.sqlite3
 /db/*.sqlite3.bak # db sample
 /db/*.sqlite3-journal
-/db/backup/*
 
 # Public assets 
 /public/assets/application-*
@@ -24,6 +23,10 @@
 # Ignore uploaded images
 /public/uploads/photo
 
+# Ignore backups
+/backup/*.tgz
+/backup/*.dump
+
 # Ignore other unneeded files.
 database.yml
 doc/
@@ -33,3 +36,4 @@ doc/
 .DS_Store
 .idea
 .secret
+secrets.yml
