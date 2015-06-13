@@ -38,3 +38,4 @@ doc/
 .secret
 secrets.yml
 seeds*.rb
+/spring
