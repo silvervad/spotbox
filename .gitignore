@@ -37,3 +37,4 @@ doc/
 .idea
 .secret
 secrets.yml
+seeds*.rb

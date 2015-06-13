@@ -27,3 +27,5 @@ Country.create!(name: "Dominican Republic", continent: Continent.find_by(name: '
 School.create!(spot_id: 1, name: 'Tornado Surf', latitude: 26.795834, longitude: 33.941896,
 	link: 'http://www.tornadosurf.com', affiliation: 1)
 
+User.create!(name: "Vad", email: "postav@gmail.com", 
+	password: "d0ntm355")
