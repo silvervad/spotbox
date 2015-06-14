@@ -13,7 +13,7 @@
 /db/*.sqlite3-journal
 
 # Public assets 
-/public/assets/application-*
+/public/assets/*
 /public/assets/bootstrap/*
 
 # Ignore all logfiles and tempfiles.
