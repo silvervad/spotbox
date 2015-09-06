@@ -92,6 +92,8 @@ function gmap_init() {
     
     markers = gon.markers,
     
+    google_markers_array = [],
+    
     iconNormal = {
           path: google.maps.SymbolPath.CIRCLE,
           scale: 6,
@@ -168,6 +170,8 @@ function gmap_init() {
         title: markers[i][0],
       });
       
+      google_markers_array.push(marker);
+      
       myBounds.extend(myLatLng);
       
       // listeners for 'edit' mode
@@ -215,6 +219,7 @@ function gmap_init() {
         }
       }
     }
+    var mc = new MarkerClusterer(map, google_markers_array);
   }
 
 // Setting bounds (center and zoom)
@@ -228,6 +233,7 @@ function gmap_init() {
     else { 
       if (mode == "country" || mode =="new") {
         // 'country' and 'new' modes
+        
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': gon.country}, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {

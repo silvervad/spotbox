@@ -7,4 +7,4 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf fotorama.js gmap.js gcharts.js navi.js)
+Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf fotorama.js gmap.js gcharts.js navi.js markerclusterer.js)
