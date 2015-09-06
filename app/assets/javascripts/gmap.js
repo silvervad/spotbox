@@ -96,21 +96,21 @@ function gmap_init() {
     
     iconNormal = {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 6,
-          strokeColor: '#003333',
-          strokeOpacity: 0.8,
+          scale: 9,
+          strokeColor: '#00FF99', //#003333
+          strokeOpacity: 1,
           strokeWeight: 2,
-          fillColor: '#00FF99',
+          fillColor: '#D2006B',  //#00FF99
           fillOpacity: 1
     },
     
      iconHover = {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 6,
-          strokeColor: '#003333',
-          strokeOpacity: 0.8,
+          scale: 9,
+          strokeColor: '#00FF99',
+          strokeOpacity: 1,
           strokeWeight: 3,
-          fillColor: '#00FF99',
+          fillColor: '#D2336B',
           fillOpacity: 1
     },
     mode = "none";
@@ -163,6 +163,7 @@ function gmap_init() {
   if (markers) {  
     for (i = 0; i < markers.length; i++) {  
       myLatLng = new google.maps.LatLng(markers[i][1], markers[i][2]);
+      
       marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
@@ -170,8 +171,10 @@ function gmap_init() {
         title: markers[i][0],
       });
       
+      // add marker to globar array
       google_markers_array.push(marker);
       
+      // extend boundaries to include current marker coordinates
       myBounds.extend(myLatLng);
       
       // listeners for 'edit' mode
@@ -219,7 +222,10 @@ function gmap_init() {
         }
       }
     }
-    var mc = new MarkerClusterer(map, google_markers_array);
+    // check if we have more than 1 marker
+    if (google_markers_array.length > 1) {
+      var mc = new MarkerClusterer(map, google_markers_array);
+    }
   }
 
 // Setting bounds (center and zoom)
