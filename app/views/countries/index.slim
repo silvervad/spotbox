@@ -1,17 +1,15 @@
-//countries # index
-//=====================
+// countries # index
 
-h2 World
-p
-ul.info-partial = render partial: "layouts/country_short", collection: Country.all.order('name')
-  
-br
+//- provide(:title, @country.name)
 
-//section
-  nav 
-    a#but.navicon-button.x
-      .navicon
-      
-//= link_to "New country", new_country_path
+#canvas
 
-//=link_to 'Signup', signup_path, class: 'button'
+  #country-map-canvas 
+
+//= simple_format @spots.to_yaml
+//= @markers.inspect
+
+
+// can add &signed_in=true to gmaps init string for stylish controls
+= javascript_include_tag src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV0NXyd7BVaG6CuyzITjfsn2IIFsjedOk" 
+= javascript_include_tag "gmap"
