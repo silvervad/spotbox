@@ -96,7 +96,7 @@ function gmap_init() {
     
     iconNormal = {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 9,
+          scale: 8,
           strokeColor: '#00FF99', //#003333
           strokeOpacity: 1,
           strokeWeight: 2,
@@ -106,7 +106,7 @@ function gmap_init() {
     
      iconHover = {
           path: google.maps.SymbolPath.CIRCLE,
-          scale: 9,
+          scale: 8,
           strokeColor: '#00FF99',
           strokeOpacity: 1,
           strokeWeight: 3,
