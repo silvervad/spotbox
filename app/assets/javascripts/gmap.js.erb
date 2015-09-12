@@ -113,7 +113,17 @@ function gmap_init() {
           fillColor: '#D2336B',
           fillOpacity: 1
     },
-    mode = "none";
+    mode = "none",
+    
+    clusterStyles = [
+      {
+        url: "<%= image_path('m1.png') %>",
+        height: 66,
+        width: 66,
+        textSize: 15
+      }
+    ];
+      
   
 //Placing map in the div
 
@@ -224,7 +234,7 @@ function gmap_init() {
     }
     // check if we have more than 1 marker
     if (google_markers_array.length > 1) {
-      var mc = new MarkerClusterer(map, google_markers_array);
+      var mc = new MarkerClusterer(map, google_markers_array, {styles: clusterStyles});
     }
   }
 
