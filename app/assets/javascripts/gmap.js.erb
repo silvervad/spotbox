@@ -179,9 +179,10 @@ function gmap_init() {
         map: map,
         icon: iconNormal,
         title: markers[i][1],
+        place: {placeId: markers[i][0].toString(), location: myLatLng}
       });
       
-      // add marker to globar array
+      // add marker to global array
       google_markers_array.push(marker);
       
       // extend boundaries to include current marker coordinates
@@ -232,9 +233,25 @@ function gmap_init() {
         }
       }
     }
-    // check if we have more than 1 marker
+    // check if we have more than 1 marker then render clusters
     if (google_markers_array.length > 1) {
-      var mc = new MarkerClusterer(map, google_markers_array, {styles: clusterStyles});
+      var mc = new MarkerClusterer(map, google_markers_array, {zoomOnClick: false, styles: clusterStyles});
+      
+      google.maps.event.addListener(mc, 'clusterclick', function(mc) {
+        var clusterMarkers = mc.getMarkers(),
+        redirectUrl = "spots?spot_ids=";
+        
+        for (i = 0; i < clusterMarkers.length; i++) {  
+          redirectUrl += clusterMarkers[i].place.placeId.toString() + ',';
+        }
+        
+        //remove trailing comma
+        redirectUrl = redirectUrl.slice(0,-1);
+        
+        //redirect to see all spots included
+        document.location = redirectUrl;
+        }
+      )
     }
   }
 

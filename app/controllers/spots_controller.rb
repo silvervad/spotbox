@@ -8,7 +8,12 @@ class SpotsController < ApplicationController
   # GET /spots
   # GET /spots.json
   def index
-    @spots = Spot.all
+    
+    # read params and split spot_ids
+    spot_ids = params[:spot_ids].split(',')
+    
+    # only spots that are from URL parameters
+    @spots = Spot.where(id: spot_ids)
     @markers = @spots.map do |s|
       [ s.id, s.name, s.latitude, s.longitude, country_spot_url(s.country, s) ]
     end
@@ -122,7 +127,7 @@ class SpotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def spot_params
-      params.require(:spot).permit(:name, :latitude, :longitude,  :country_id, 
+      params.require(:spot).permit(:spot_ids, :name, :latitude, :longitude,  :country_id, 
         photos_attributes: [:id, :image, :imageable_id], seasons_attributes: [:id, :spot_id, :sport_id, :months])
     end
     
