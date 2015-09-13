@@ -1,25 +1,59 @@
 // spots # index
 //=====================
 
-- provide(:title, @country.name)
+- provide(:title, "Spots")
 
-#spots-index
-  
-  .nav-bar Spots in #{@country.name}
-  
-  ul
-    - @spots.each do |spot|
-      li = link_to spot.name, country_spot_path(@country, spot)
+#nav-bar.nav-bar.no-select
+  = link_to root_path
+    #button-home.button-no-bg.navi-button.icon-home title="Home"
     
+  //#button-toggle-menu.navicon-button.x.menu-open title="Close Menu"
+    .navicon
+
+  = link_to root_path
+    #button-up.button-no-bg.navi-button.icon-undo2 title="Up"
   
+  #button-center-map.button-no-bg.navi-button.icon-target title="Center"
+  #button-toggle-info.button-no-bg.navi-button.icon-circle-up title="Close Info"
   
-  br
+  #button-toggle-nav.button-no-bg.navi-button.icon-circle-right title="Close Navigation"
 
-  = link_to 'New Spot', new_country_spot_path(@country)
+  //#nav-text.no-select
+    =@country.name
+    
 
+#info-bar.nano
 
-#map-canvas 
+  .nano-content
+    
+    .info-title Spots  
+    ul.info-partial = render partial: "layouts/spot_short", collection: @spots.order('name')
+
+    br
+    br
+    
+    //-if logged_in?
+      =link_to 'New Spot', new_country_spot_path(@country)
+      
+    p
+      
+    -if logged_in? 
+      =current_user.name
+      =link_to "  Log out", logout_path, method: "delete"
+      
+
+  
+#canvas
+
+  #country-map-canvas 
 
 //= simple_format @spots.to_yaml
 //= @markers.inspect
 
+
+
+= javascript_include_tag 'navi'
+// can add &signed_in=true to gmaps init string for stylish controls
+= javascript_include_tag src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV0NXyd7BVaG6CuyzITjfsn2IIFsjedOk" 
+= javascript_include_tag "gmap"
+= javascript_include_tag "markerclusterer"

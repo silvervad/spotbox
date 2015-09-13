@@ -1,20 +1,19 @@
 class SpotsController < ApplicationController
   before_action :set_spot, only: [:show, :edit, :update, :destroy]
-  before_action :set_country
+  before_action :set_country, except: [ :index ]
   before_action :set_spot_marker, only: [ :show, :edit ]
   before_action :require_login, only: [ :edit, :update, :destroy ]
   before_action :require_login_for_new, only: [ :new, :create ]
 
   # GET /spots
   # GET /spots.json
-  # def index
-  #   @spots = Spot.all
-  #   @markers = @spots.map do |s|
-  #     [ s.name, s.latitude, s.longitude, country_spot_url(@country, s) ]
-  #   end
-  #   gon.markers = @markers
-  #   gon.country = @country.name
-  # end
+  def index
+    @spots = Spot.all
+    @markers = @spots.map do |s|
+      [ s.id, s.name, s.latitude, s.longitude, country_spot_url(s.country, s) ]
+    end
+    gon.markers = @markers
+  end
 
   # GET /spots/1
   # GET /spots/1.json
@@ -103,7 +102,7 @@ class SpotsController < ApplicationController
     @spot.destroy
     redirect_to country_path(@country), notice: 'Spot was successfully destroyed.'
   end
-
+  
 ### Private methods
 
   private
