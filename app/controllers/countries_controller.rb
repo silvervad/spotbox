@@ -5,7 +5,7 @@ class CountriesController < ApplicationController
   def show
     @spots = @country.spots
     @markers = @spots.map do |s|
-      [ s.name, s.latitude, s.longitude, country_spot_url(@country, s) ]
+      [ s.id, s.name, s.latitude, s.longitude, country_spot_url(@country, s) ]
     end
     gon.markers = @markers
     gon.country = @country.name
@@ -18,7 +18,7 @@ class CountriesController < ApplicationController
     @countries.each do |country|
       @spots = country.spots
       markers = @spots.map do |s|
-        [ s.name, s.latitude, s.longitude, country_spot_url(country, s) ]
+        [ s.id, s.name, s.latitude, s.longitude, country_spot_url(country, s) ]
       end
       
       gon.country = country.name

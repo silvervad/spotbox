@@ -44,7 +44,7 @@ class SpotsController < ApplicationController
     
     # passing markers and country name to gmaps js api
     
-    gon.markers = [[ @spot.name, @spot.latitude, @spot.longitude, '']]
+    gon.markers = [[ @spot.id, @spot.name, @spot.latitude, @spot.longitude, '']]
     gon.country = @country.name
     
   end
@@ -117,7 +117,7 @@ class SpotsController < ApplicationController
     end
     
     def set_spot_marker
-      gon.markers = [[ @spot.name, @spot.latitude, @spot.longitude, country_spot_url]]
+      gon.markers = [[ @spot.id, @spot.name, @spot.latitude, @spot.longitude, country_spot_url]]
       gon.country = @country.name
     end
 

@@ -172,13 +172,13 @@ function gmap_init() {
   
   if (markers) {  
     for (i = 0; i < markers.length; i++) {  
-      myLatLng = new google.maps.LatLng(markers[i][1], markers[i][2]);
+      myLatLng = new google.maps.LatLng(markers[i][2], markers[i][3]);
       
       marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
         icon: iconNormal,
-        title: markers[i][0],
+        title: markers[i][1],
       });
       
       // add marker to globar array
@@ -209,7 +209,7 @@ function gmap_init() {
       } else  {
         google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
           return function() {
-            windowContent = "<span class=map-info-window>" + markers[i][0] + "</span>"
+            windowContent = "<span class=map-info-window>" + markers[i][1] + "</span>"
             infowindow.setContent(windowContent);
             infowindow.open(map, marker);
             marker.setIcon(iconHover);
@@ -226,7 +226,7 @@ function gmap_init() {
         if (mode == 'country') {
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-              window.location.href = markers[i][3]; 
+              window.location.href = markers[i][4]; 
             }
           })(marker, i));
         }
