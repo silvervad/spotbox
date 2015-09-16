@@ -1,7 +1,7 @@
 // spots # index
 //=====================
 
-- provide(:title, "Spots")
+- provide(:title, "Spots near " + @country.name)
 
 #nav-bar.nav-bar.no-select
   = link_to root_path
@@ -18,8 +18,11 @@
   
   #button-toggle-nav.button-no-bg.navi-button.icon-circle-right title="Close Navigation"
 
-  //#nav-text.no-select
-    =@country.name
+  #nav-text.no-select
+    'Spots near 
+    =link_to @country.name, @country
+    
+      
     
 
 #info-bar.nano

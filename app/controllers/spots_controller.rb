@@ -18,6 +18,11 @@ class SpotsController < ApplicationController
       [ s.id, s.name, s.latitude, s.longitude, country_spot_url(s.country, s) ]
     end
     gon.markers = @markers
+    
+    # get the most probable country for the set of spots
+    @country = probable_country(@spots)
+    # @countries = probable_countries(@spots)
+    gon.country = @country
   end
 
   # GET /spots/1
@@ -111,7 +116,10 @@ class SpotsController < ApplicationController
 ### Private methods
 
   private
+  
     # Use callbacks to share common setup or constraints between actions.
+    ###
+    
     def set_spot
       @spot = Spot.friendly.find(params[:id])
     end
@@ -126,6 +134,8 @@ class SpotsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    ###
+    
     def spot_params
       params.require(:spot).permit(:spot_ids, :name, :latitude, :longitude,  :country_id, 
         photos_attributes: [:id, :image, :imageable_id], seasons_attributes: [:id, :spot_id, :sport_id, :months])
@@ -144,5 +154,33 @@ class SpotsController < ApplicationController
         redirect_to root_path
       end
     end
+    
+    
+    # spits one country for most spots in the input array
+    ###
+ 
+    def probable_country (spots)
+     countries = Hash.new(0)
+      spots.each do |spot|
+        countries[spot.country] += 1
+      end
+      
+      # get the country with max spots
+      countries.max_by{|_key, value| value}.first
+    end
+    
+    # get list of unique countries for spots sorted in order of number of spots
+    ###
+    
+    def probable_countries (spots)
+      countries = Hash.new(0)
+      spots.each do |spot|
+        countries[spot.country] += 1
+      end
+      
+      countries.sort_by{|_key, value| -value}
+      return countries.map {|_key, value| _key}
+    end
+  
     
 end
