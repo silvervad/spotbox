@@ -60,16 +60,5 @@ class CountryLayoutTest < ActionDispatch::IntegrationTest
     assert_select "div#info-bar"
   end
   
-  # Countries index should contain list of countries
-  test "index should contain list of countries" do
-    country2 = countries(:tanzania)
-    country3 = countries(:russia)
-    get root_path
-    assert_select "a[href=?]", country_path(@country)
-    assert_select "a[href=?]", country_path(country2)
-    assert_select "a[href=?]", country_path(country3)
-  end
-  
 
-  
 end

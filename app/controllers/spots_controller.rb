@@ -49,6 +49,7 @@ class SpotsController < ApplicationController
     @spot.latitude = 0
     @spot.longitude = 0
     @photos = @spot.photos.build
+    @spot.id = 0
     #@seasons = @spot.seasons.build
     
     # passing markers and country name to gmaps js api

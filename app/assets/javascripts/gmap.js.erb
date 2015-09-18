@@ -179,7 +179,7 @@ function gmap_init() {
         map: map,
         icon: iconNormal,
         title: markers[i][1],
-        place: {placeId: markers[i][0].toString(), location: myLatLng}
+        id: markers[i][0]
       });
       
       // add marker to global array
@@ -242,7 +242,7 @@ function gmap_init() {
         redirectUrl = "/spots/";
         
         for (i = 0; i < clusterMarkers.length; i++) {  
-          redirectUrl += clusterMarkers[i].place.placeId.toString() + ',';
+          redirectUrl += clusterMarkers[i].id.toString() + ',';
         }
         
         //remove trailing comma

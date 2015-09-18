@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   #resources :schools
 
   #resources :spots, path: '', only: [ :show, :edit, :update, :destroy, :new, :create ]
+  get   'spots' => 'countries#index'
   get   '/spots/:id', to: 'spots#index', as: 'spot'
   # resources :spots, only: [ :index ]
   
