@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   #resources :schools
 
   #resources :spots, path: '', only: [ :show, :edit, :update, :destroy, :new, :create ]
-  resources :spots, only: [ :index ]
+  get   '/spots/:id', to: 'spots#index', as: 'spot'
+  # resources :spots, only: [ :index ]
   
   resources :countries, path: '', only: [ :show ] do 
     resources :spots, path: '', except: [ :index ]

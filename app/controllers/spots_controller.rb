@@ -10,7 +10,7 @@ class SpotsController < ApplicationController
   def index
     
     # read params and split spot_ids
-    spot_ids = params[:spot_ids].split(',')
+    spot_ids = params[:id].split(',')
     
     # only spots that are from URL parameters
     @spots = Spot.where(id: spot_ids)
@@ -116,7 +116,6 @@ class SpotsController < ApplicationController
 ### Private methods
 
   private
-  
     # Use callbacks to share common setup or constraints between actions.
     ###
     
@@ -137,7 +136,7 @@ class SpotsController < ApplicationController
     ###
     
     def spot_params
-      params.require(:spot).permit(:spot_ids, :name, :latitude, :longitude,  :country_id, 
+      params.require(:spot).permit( :name, :latitude, :longitude,  :country_id, 
         photos_attributes: [:id, :image, :imageable_id], seasons_attributes: [:id, :spot_id, :sport_id, :months])
     end
     

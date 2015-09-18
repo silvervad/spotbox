@@ -239,7 +239,7 @@ function gmap_init() {
       
       google.maps.event.addListener(mc, 'clusterclick', function(mc) {
         var clusterMarkers = mc.getMarkers(),
-        redirectUrl = "spots?spot_ids=";
+        redirectUrl = "/spots/";
         
         for (i = 0; i < clusterMarkers.length; i++) {  
           redirectUrl += clusterMarkers[i].place.placeId.toString() + ',';
