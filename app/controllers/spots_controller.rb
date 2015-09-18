@@ -21,8 +21,12 @@ class SpotsController < ApplicationController
     
     # get the most probable country for the set of spots
     @country = probable_country(@spots)
-    # @countries = probable_countries(@spots)
     gon.country = @country
+    
+    redirect_to @country if exact_country?(@country, @spots) 
+
+    # @countries = probable_countries(@spots)
+
   end
 
   # GET /spots/1
@@ -180,6 +184,15 @@ class SpotsController < ApplicationController
       
       countries.sort_by{|_key, value| -value}
       return countries.map {|_key, value| _key}
+    end
+    
+    def exact_country? (country, spots)
+      # get all spots in the country as an array instead of ActiveRecord Collection
+      country_spots = country.spots.as_json
+      if country_spots.length == spots.length 
+        return true
+      end
+      false
     end
   
     
