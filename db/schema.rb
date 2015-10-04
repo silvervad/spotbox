@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524110724) do
+ActiveRecord::Schema.define(version: 20150919093710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 20150524110724) do
     t.string   "imageable_type"
   end
 
+  create_table "regions", force: true do |t|
+    t.string   "name"
+    t.integer  "country_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "slug"
+  end
+
+  add_index "regions", ["country_id"], name: "index_regions_on_country_id", using: :btree
+  add_index "regions", ["name"], name: "index_regions_on_name", unique: true, using: :btree
+  add_index "regions", ["slug"], name: "index_regions_on_slug", unique: true, using: :btree
+
   create_table "schools", force: true do |t|
     t.integer  "spot_id"
     t.integer  "sports"
@@ -93,10 +105,12 @@ ActiveRecord::Schema.define(version: 20150524110724) do
     t.datetime "updated_at"
     t.integer  "country_id"
     t.string   "slug"
+    t.integer  "region_id"
   end
 
   add_index "spots", ["country_id"], name: "index_spots_on_country_id", using: :btree
   add_index "spots", ["name"], name: "index_spots_on_name", using: :btree
+  add_index "spots", ["region_id"], name: "index_spots_on_region_id", using: :btree
   add_index "spots", ["slug"], name: "index_spots_on_slug", unique: true, using: :btree
 
   create_table "users", force: true do |t|

@@ -6,7 +6,7 @@ class ChangeLatitudeAndLongitudeInSchools < ActiveRecord::Migration
   end
 
   def down
-	change_column :schools, :latitude, :decimal
-	change_column :schools, :longitude, :decimal
+	  change_column :schools, :latitude, :decimal
+	  change_column :schools, :longitude, :decimal
   end
 end
